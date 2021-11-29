@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="">
-  <title>D. Min Cost String | 荧惑の杂货铺子v2.3</title>
+  <title>D. Min Cost String | 荧惑の杂货铺子v2.4</title>
   <meta name="author" content="荧惑" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -15,12 +15,12 @@
   
     <meta name="keywords" content="哈希, 字符串, 贪心" />
   
-  <meta name="description" content="构造一个字符串，给定n, k。n代表字符串长度，k代表字符串可以使用的符号范围（自a起），对于$s_i &#x3D;&#x3D; s_j 同时 s_{i + 1} &#x3D;&#x3D; s_{j + 1}$ 这样的片段会使得字符串的消耗加一，求最小消耗.">
+  <meta name="description" content="构造一个字符串，给定n, k。n代表字符串长度，k代表字符串可以使用的符号范围（自a起），对于$si &#x3D;&#x3D; s_j 同时 s{i + 1} &#x3D;&#x3D; s_{j + 1}$ 这样的片段会使得字符串的消耗加一，求最小消耗.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="D. Min Cost String">
 <meta property="og:url" content="http://example.com/2021/11/17/D.%20Min%20Cost%20String/index.html">
-<meta property="og:site_name" content="荧惑の杂货铺子v2.3">
-<meta property="og:description" content="构造一个字符串，给定n, k。n代表字符串长度，k代表字符串可以使用的符号范围（自a起），对于$s_i &#x3D;&#x3D; s_j 同时 s_{i + 1} &#x3D;&#x3D; s_{j + 1}$ 这样的片段会使得字符串的消耗加一，求最小消耗.">
+<meta property="og:site_name" content="荧惑の杂货铺子v2.4">
+<meta property="og:description" content="构造一个字符串，给定n, k。n代表字符串长度，k代表字符串可以使用的符号范围（自a起），对于$si &#x3D;&#x3D; s_j 同时 s{i + 1} &#x3D;&#x3D; s_{j + 1}$ 这样的片段会使得字符串的消耗加一，求最小消耗.">
 <meta property="og:locale">
 <meta property="og:image" content="http://example.com/2021/11/17/D.%20Min%20Cost%20String/miku04.jpg">
 <meta property="article:published_time" content="2021-11-16T16:00:00.000Z">
@@ -78,6 +78,8 @@
   
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
 
 
@@ -129,7 +131,7 @@
             </header>
             <header id="kratos-mobile-topnav" class="kratos-topnav">
                 <div class="container">
-                    <div class="color-logo"><a href="/">荧惑の杂货铺子v2.3</a></div>
+                    <div class="color-logo"><a href="/">荧惑の杂货铺子v2.4</a></div>
                     <div class="nav-toggle">
                         <a class="kratos-nav-toggle js-kratos-nav-toggle">
                             <i></i>
@@ -143,7 +145,7 @@
             <div class="kratos-cover kratos-cover-2 text-center">
                 <div class="desc desc2 animate-box">
                     <a href="/">
-                        <h2>荧惑の杂货铺子v2.3</h2> <br />
+                        <h2>荧惑の杂货铺子v2.4</h2> <br />
                         <span></span>
                     </a>
                 </div>
@@ -175,7 +177,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        1021
+                        1017
                     
                     字
                 </li>
@@ -188,15 +190,13 @@
             </div>
             
             <hr />
-            <p>构造一个字符串，给定n, k。n代表字符串长度，k代表字符串可以使用的符号范围（自a起），对于$s_i == s_j 同时 s_{i + 1} == s_{j + 1}$ 这样的片段会使得字符串的消耗加一，求最小消耗.</p>
+            <p>构造一个字符串，给定n, k。n代表字符串长度，k代表字符串可以使用的符号范围（自a起），对于$s<em>i == s_j 同时 s</em>{i + 1} == s_{j + 1}$ 这样的片段会使得字符串的消耗加一，求最小消耗.</p>
 <span id="more"></span>
-
-<p>对于字符串的处理优先考虑<em><strong>哈希</strong></em>​(本人就憨憨的直接开写),把这道题将进一步考虑，对于组合ab，当它被用过后，它的选择优先度会降低，因为此前与他匹配过的每一对都可以继续匹配，因此，贪心的方向是尽可能的<em><strong>平均使用</strong></em>各组合，于是我们可以记录一下已经使用过的组合</p>
+<p>对于字符串的处理优先考虑<strong><em>哈希</em></strong>​(本人就憨憨的直接开写),把这道题将进一步考虑，对于组合ab，当它被用过后，它的选择优先度会降低，因为此前与他匹配过的每一对都可以继续匹配，因此，贪心的方向是尽可能的<strong><em>平均使用</em></strong>各组合，于是我们可以记录一下已经使用过的组合</p>
 <p>对于使用次数不相同的组合，应使用使用次数少的</p>
 <p>对于使用次数相同的组合，应使用字典序靠后的（这里，因为我们的遍历是从a-&gt;z,那么我们如果不以这个为判断，会浪费掉本可以使用的部分）</p>
 <p>于是代码如下</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">5e5</span> + <span class="number">5</span>;</span><br><span class="line">map&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;mp;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hs</span><span class="params">(<span class="keyword">char</span> a, <span class="keyword">char</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a * <span class="number">100</span> + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	<span class="keyword">int</span> n, m; cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">char</span> l = <span class="string">&#x27;a&#x27;</span>, r = <span class="string">&#x27;a&#x27;</span> + m - <span class="number">1</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">	<span class="keyword">char</span> pre = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)&#123;</span><br><span class="line">		<span class="keyword">int</span> sign = maxn;</span><br><span class="line">		<span class="keyword">char</span> ans;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">char</span> j = l; j &lt;= r; ++j)&#123;</span><br><span class="line">			<span class="keyword">int</span> e = <span class="built_in">hs</span>(pre,j);</span><br><span class="line">			<span class="keyword">if</span>(sign &gt;= mp[e])&#123;</span><br><span class="line">				sign = mp[e];</span><br><span class="line">				ans = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		mp[<span class="built_in">hs</span>(pre,ans)]++;</span><br><span class="line">		cout &lt;&lt; ans;</span><br><span class="line">		pre = ans;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -264,7 +264,7 @@
             const twitterBase   = "https://twitter.com/intent/tweet?";
             const hostUrl       = "http://example.com/2021/11/17/D.%20Min%20Cost%20String/";
             const title         = "「D. Min Cost String」";
-            const excerpt       = `构造一个字符串，给定n, k。n代表字符串长度，k代表字符串可以使用的符号范围（自a起），对于$s_i == s_j 同时 s_{i + 1} == s_{j + 1}$ 这样的片段会使得字符串的消耗加一，求最小消耗.`;
+            const excerpt       = `构造一个字符串，给定n, k。n代表字符串长度，k代表字符串可以使用的符号范围（自a起），对于$si == s_j 同时 s{i + 1} == s_{j + 1}$ 这样的片段会使得字符串的消耗加一，求最小消耗.`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -412,7 +412,7 @@
                     </ul>
                     <ul class="kratos-copyright">
                         <div>
-                            <li>&copy; 2021 荧惑の杂货铺子v2.3 版权所有.</li>
+                            <li>&copy; 2021 荧惑の杂货铺子v2.4 版权所有.</li>
                             <li>本站已运行<span id="span_dt">Loading...</span></li>
                         </div>
                         <div>
