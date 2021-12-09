@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="">
-  <title>B.Stoned-Game | 荧惑の杂货铺子v3.6</title>
+  <title>哈夫曼树 | 荧惑の杂货铺子v3.6</title>
   <meta name="author" content="荧惑" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,23 +13,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="博弈, 贪心" />
+    <meta name="keywords" content="" />
   
-  <meta name="description" content="呜呜不能咸鱼了，努力刷构造尽快提高蒙猜水平">
+  <meta name="description" content="解决问题哈夫曼树解决了无损压缩问题 解决方法对于一个字符串 AAABBC 正常储存需要六位char，也就是6个字节，一个字节8位，也就是需要48位，这个时候就可以考虑到打表的时候苦于内存不够之类的悲伤情况，当然日用也有需要。 如果，我们能把一个需要XXXX XXXX来储存同时大量储存信息没用的存储方式用类似哈希映射的方案，很显然能够极大提高储存效率。 这时就是哈夫曼树的出场环境了  过程类似合并">
 <meta property="og:type" content="article">
-<meta property="og:title" content="B.Stoned-Game">
-<meta property="og:url" content="http://example.com/2021/12/06/B.Stoned-Game/index.html">
+<meta property="og:title" content="哈夫曼树">
+<meta property="og:url" content="http://example.com/2021/12/09/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/index.html">
 <meta property="og:site_name" content="荧惑の杂货铺子v3.6">
-<meta property="og:description" content="呜呜不能咸鱼了，努力刷构造尽快提高蒙猜水平">
+<meta property="og:description" content="解决问题哈夫曼树解决了无损压缩问题 解决方法对于一个字符串 AAABBC 正常储存需要六位char，也就是6个字节，一个字节8位，也就是需要48位，这个时候就可以考虑到打表的时候苦于内存不够之类的悲伤情况，当然日用也有需要。 如果，我们能把一个需要XXXX XXXX来储存同时大量储存信息没用的存储方式用类似哈希映射的方案，很显然能够极大提高储存效率。 这时就是哈夫曼树的出场环境了  过程类似合并">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2021/12/06/B.Stoned-Game/miku06.jpg">
-<meta property="article:published_time" content="2021-12-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-06T13:01:44.269Z">
+<meta property="og:image" content="http://example.com/2021/12/09/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/moon.jpg">
+<meta property="article:published_time" content="2021-12-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-09T07:56:44.438Z">
 <meta property="article:author" content="荧惑">
-<meta property="article:tag" content="博弈">
-<meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/12/06/B.Stoned-Game/miku06.jpg">
+<meta name="twitter:image" content="http://example.com/2021/12/09/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/moon.jpg">
 <meta name="twitter:site" content="@null">
   
   <!-- 站点验证相关 -->
@@ -274,17 +272,17 @@ mjx-container[display="true"] + br {
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">B.Stoned-Game</h1>
+                <h1 class="kratos-entry-title text-center">哈夫曼树</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2021-12-06</li>
+                <li><i class="fa fa-calendar"></i> 2021-12-09</li>
                 <li><i class="fa fa-user"></i> 作者 荧惑</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        351
+                        640
                     
                     字
                 </li>
@@ -293,24 +291,46 @@ mjx-container[display="true"] + br {
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1638795704269"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1639036604438"></time> 前，其中的内容可能需要更新。
             </div>
             
                 <div class="kratos-post-inner-toc">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#B-Stoned-Game"><span class="toc-number">1.</span> <span class="toc-text">B. Stoned Game</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90"><span class="toc-number">1.1.</span> <span class="toc-text">解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%8B%A5%E5%AD%98%E5%9C%A8%E5%A4%9A%E5%A0%86%EF%BC%8C%E5%9C%A8%E8%BF%9B%E5%85%A5%E4%B8%80%E5%A0%86%E7%8A%B6%E6%80%81%E5%89%8D%EF%BC%8C%E4%B8%80%E5%AE%9A%E4%BC%9A%E8%BF%9B%E5%85%A5%E4%B8%A4%E5%A0%86%E7%8A%B6%E6%80%81%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%BF%9B%E5%85%A5%E4%B8%A4%E5%A0%86%E7%9A%84%E7%8A%B6%E6%80%81%E5%86%B3%E5%AE%9A%E8%83%9C%E8%B4%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">3.若存在多堆，在进入一堆状态前，一定会进入两堆状态，也就是进入两堆的状态决定胜负</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">解决问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sp-%E8%BF%99%E9%87%8C%E5%BC%95%E5%85%A5%E4%B8%80%E4%B8%AA%E6%A6%82%E5%BF%B5-WPL"><span class="toc-number">2.1.</span> <span class="toc-text">sp 这里引入一个概念 WPL:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-number">3.</span> <span class="toc-text">性质</span></a></li></ol>
                 </div>
             
             <hr />
-            <p>呜呜不能咸鱼了，努力刷构造尽快提高蒙猜水平</p>
-<span id="more"></span>
-<h1 id="B-Stoned-Game"><a href="#B-Stoned-Game" class="headerlink" title="B. Stoned Game"></a>B. Stoned Game</h1><p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1396/problem/B">链接</a></p>
-<p>给定n堆石子，每次轮流取一个，其中，上个人取过的堆当前操作者不能取，求谁能赢</p>
-<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>1.若只存在1堆，alice胜 bob不能选alice选过的</p>
-<p>2.若只存在两堆，若两堆相同高度，bob胜，反之alice胜</p>
-<p><strong>（<em>这里插入一下，常常出现的一个情况是，博弈需要从特殊到普遍，从简单到复杂进行整体感受）</em></strong></p>
-<h3 id="3-若存在多堆，在进入一堆状态前，一定会进入两堆状态，也就是进入两堆的状态决定胜负"><a href="#3-若存在多堆，在进入一堆状态前，一定会进入两堆状态，也就是进入两堆的状态决定胜负" class="headerlink" title="3.若存在多堆，在进入一堆状态前，一定会进入两堆状态，也就是进入两堆的状态决定胜负"></a>3.若存在多堆，在进入一堆状态前，一定会进入两堆状态，也就是进入两堆的状态决定胜负</h3><p>sp 最高的一枝如果高于其他所有 alice直接获胜（无敌的青眼白龙）</p>
-<p>在两人有来有回的操作下，奇偶性一定不变，若为奇数，则一定不会出现两队相同高度，alice胜</p>
-<p>反之，若为偶数，在有来有回的情况下，bob一定能实现两个相同高度的构造，bob胜</p>
+            <span id="more"></span>
+<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>哈夫曼树解决了无损压缩问题</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>对于一个字符串</p>
+<p>AAABBC</p>
+<p>正常储存需要六位char，也就是6个字节，一个字节8位，也就是需要48位，这个时候就可以考虑到打表的时候苦于内存不够之类的悲伤情况，当然日用也有需要。</p>
+<p>如果，我们能把一个需要XXXX XXXX来储存同时大量储存信息没用的存储方式用类似哈希映射的方案，很显然能够极大提高储存效率。</p>
+<p>这时就是哈夫曼树的出场环境了</p>
+<p><img src="C:\Users\86186\AppData\Roaming\Typora\typora-user-images\image-20211209153848327.png" alt="image-20211209153848327"></p>
+<p>过程类似合并果子，共有两步</p>
+<p>预处理把所有字符出现次数储存，也就是3 2 1</p>
+<p>1.找到最小的两个，并合并</p>
+<p>2.将这两个的和再次放入</p>
+<p>直到剩下唯一一个</p>
+<p>此时我们可以对几个数字进行编码</p>
+<p><img src="C:\Users\86186\AppData\Roaming\Typora\typora-user-images\image-20211209154332891.png" alt="image-20211209154332891"></p>
+<p>我们可以进行一下比较</p>
+<p>对于AAABBC</p>
+<p>原串为XXXXXXXX  XXXXXXXX  XXXXXXXX  XXXXXXXX  XXXXXXXX  XXXXXXXX  </p>
+<p>更改为0  0  0  11  11  10</p>
+<p>48 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="1.181ex" role="img" focusable="false" viewBox="0 -511 1000 522"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2192" d="M56 237T56 250T70 270H835Q719 357 692 493Q692 494 692 496T691 499Q691 511 708 511H711Q720 511 723 510T729 506T732 497T735 481T743 456Q765 389 816 336T935 261Q944 258 944 250Q944 244 939 241T915 231T877 212Q836 186 806 152T761 85T740 35T732 4Q730 -6 727 -8T711 -11Q691 -11 691 0Q691 7 696 25Q728 151 835 230H70Q56 237 56 250Z"></path></g></g></g></svg></mjx-container> 9 好耶！</p>
+<h3 id="sp-这里引入一个概念-WPL"><a href="#sp-这里引入一个概念-WPL" class="headerlink" title="sp 这里引入一个概念 WPL:"></a>sp 这里引入一个概念 WPL:</h3><p>WPL 是 Weight external Path Length 加权路径长度</p>
+<p>这个概念来自于二叉树,对于一个编码,WPL越低,效率越高</p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>1.所有字符节点都为叶子节点 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="1.181ex" role="img" focusable="false" viewBox="0 -511 1000 522"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2192" d="M56 237T56 250T70 270H835Q719 357 692 493Q692 494 692 496T691 499Q691 511 708 511H711Q720 511 723 510T729 506T732 497T735 481T743 456Q765 389 816 336T935 261Q944 258 944 250Q944 244 939 241T915 231T877 212Q836 186 806 152T761 85T740 35T732 4Q730 -6 727 -8T711 -11Q691 -11 691 0Q691 7 696 25Q728 151 835 230H70Q56 237 56 250Z"></path></g></g></g></svg></mjx-container> 不存在一个字符的表示，是另一个字符的前缀</p>
+<p>证明：</p>
+<p>使用反证法,若存在一个字符是另一个字符的前缀:</p>
+<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="1.509ex" height="1.251ex" role="img" focusable="false" viewBox="0 -471 667 553"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2235" d="M23 411Q23 437 41 454T84 471Q108 471 125 454T143 411T126 368T83 351Q57 351 40 368T23 411ZM523 411Q523 437 541 454T584 471Q608 471 625 454T643 411T626 368T583 351Q557 351 540 368T523 411ZM274 -22Q274 4 291 21T334 38Q356 38 374 22T392 -22T375 -65T333 -82Q307 -82 291 -65T274 -22Z"></path></g></g></g></svg></mjx-container> 存在一个字符是另一个字符的前缀</p>
+<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="1.509ex" height="1.251ex" role="img" focusable="false" viewBox="0 -471 667 553"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2234" d="M273 411Q273 437 291 454T334 471Q358 471 375 454T393 411T376 368T333 351Q307 351 290 368T273 411ZM84 38Q110 38 126 21T143 -22Q143 -46 127 -64T83 -82Q57 -82 41 -65T24 -22Q24 4 41 21T84 38ZM524 -22Q524 4 541 21T584 38Q608 38 625 21T643 -22Q643 -45 627 -63T583 -82Q557 -82 541 -65T524 -22Z"></path></g></g></g></svg></mjx-container> 一个字符是另一个字符的直系祖先</p>
+<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="1.509ex" height="1.251ex" role="img" focusable="false" viewBox="0 -471 667 553"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2235" d="M23 411Q23 437 41 454T84 471Q108 471 125 454T143 411T126 368T83 351Q57 351 40 368T23 411ZM523 411Q523 437 541 454T584 471Q608 471 625 454T643 411T626 368T583 351Q557 351 540 368T523 411ZM274 -22Q274 4 291 21T334 38Q356 38 374 22T392 -22T375 -65T333 -82Q307 -82 291 -65T274 -22Z"></path></g></g></g></svg></mjx-container> 字符必为叶子节点</p>
+<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="1.509ex" height="1.251ex" role="img" focusable="false" viewBox="0 -471 667 553"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2234" d="M273 411Q273 437 291 454T334 471Q358 471 375 454T393 411T376 368T333 351Q307 351 290 368T273 411ZM84 38Q110 38 126 21T143 -22Q143 -46 127 -64T83 -82Q57 -82 41 -65T24 -22Q24 4 41 21T84 38ZM524 -22Q524 4 541 21T584 38Q608 38 625 21T643 -22Q643 -45 627 -63T583 -82Q557 -82 541 -65T524 -22Z"></path></g></g></g></svg></mjx-container> 非法</p>
+<p>2.构型不为一,但WPL一定最低:</p>
+<p>简单考虑这个就很不错,<strong>直接子树交换</strong></p>
+<p><img src="C:\Users\86186\AppData\Roaming\Typora\typora-user-images\image-20211209155519744.png" alt="image-20211209155519744"></p>
 
         </div>
         
@@ -364,7 +384,7 @@ mjx-container[display="true"] + br {
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://example.com/2021/12/06/B.Stoned-Game/",
+                text: "http://example.com/2021/12/09/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -376,9 +396,14 @@ mjx-container[display="true"] + br {
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://example.com/2021/12/06/B.Stoned-Game/";
-            const title         = "「B.Stoned-Game」";
-            const excerpt       = `呜呜不能咸鱼了，努力刷构造尽快提高蒙猜水平`;
+            const hostUrl       = "http://example.com/2021/12/09/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/";
+            const title         = "「哈夫曼树」";
+            const excerpt       = `
+解决问题哈夫曼树解决了无损压缩问题
+解决方法对于一个字符串
+AAABBC
+正常储存需要六位char，也就是6个字节，一个字节8位，也就是需要48位，这个时候就可以考虑到打表的时候苦于内存不够之类的悲伤情况，当然日用也有需要。
+如果，...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -397,10 +422,10 @@ mjx-container[display="true"] + br {
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/%E5%8D%9A%E5%BC%88/" rel="tag">博弈</a>, <a class="tag-none-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a>
+                    
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2021-12-06</span>
+                <span>最后编辑：2021-12-09</span>
                 </div>
             </div>
         </footer>
@@ -409,13 +434,9 @@ mjx-container[display="true"] + br {
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" D.Carousel" href="/2021/12/06/D.Carousel/">&lt; 上一篇</a>
+                <a title=" B.Stoned-Game" href="/2021/12/06/B.Stoned-Game/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" 哈夫曼树" href="/2021/12/09/哈夫曼树/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     
@@ -457,7 +478,7 @@ mjx-container[display="true"] + br {
         <span class="toc-progress-bar"></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#B-Stoned-Game"><span class="toc-text">B. Stoned Game</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90"><span class="toc-text">解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%8B%A5%E5%AD%98%E5%9C%A8%E5%A4%9A%E5%A0%86%EF%BC%8C%E5%9C%A8%E8%BF%9B%E5%85%A5%E4%B8%80%E5%A0%86%E7%8A%B6%E6%80%81%E5%89%8D%EF%BC%8C%E4%B8%80%E5%AE%9A%E4%BC%9A%E8%BF%9B%E5%85%A5%E4%B8%A4%E5%A0%86%E7%8A%B6%E6%80%81%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%BF%9B%E5%85%A5%E4%B8%A4%E5%A0%86%E7%9A%84%E7%8A%B6%E6%80%81%E5%86%B3%E5%AE%9A%E8%83%9C%E8%B4%9F"><span class="toc-text">3.若存在多堆，在进入一堆状态前，一定会进入两堆状态，也就是进入两堆的状态决定胜负</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98"><span class="toc-text">解决问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sp-%E8%BF%99%E9%87%8C%E5%BC%95%E5%85%A5%E4%B8%80%E4%B8%AA%E6%A6%82%E5%BF%B5-WPL"><span class="toc-text">sp 这里引入一个概念 WPL:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-text">性质</span></a></li></ol>
     </div>
 </aside>
                 
