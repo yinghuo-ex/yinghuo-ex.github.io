@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="">
-  <title>D. Min-Cost-String | 荧惑の杂货铺子v3.6</title>
+  <title>KMP | 荧惑の杂货铺子v3.6</title>
   <meta name="author" content="荧惑" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,24 +13,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="哈希, 字符串, 贪心" />
+    <meta name="keywords" content="" />
   
-  <meta name="description" content="构造一个字符串，给定n, k。n代表字符串长度，k代表字符串可以使用的符号范围（自a起），对于同时 这样的片段会使得字符串的消耗加一，求最小消耗.">
+  <meta name="description" content="解决问题KMP算法解决了模式串O（n + m）匹配问题，其中next数组解决了字符串最长相同前后缀问题 解决方法首先朴素的考虑暴力匹配 AAAAAF AF     复杂度为O(n * m)，显然没法实现日用 因此需要一个高效匹配方案 考虑一下我们的过程 定义文本串为第i位，模式串为第j位 当 j 与 i 失配时，在 i+1 位上需要把 j 回归到第一位 很显然在遍历过程不可少的情况下，可以优化的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="D. Min-Cost-String">
-<meta property="og:url" content="http://example.com/2021/11/17/D.%20Min-Cost-String/index.html">
+<meta property="og:title" content="KMP">
+<meta property="og:url" content="http://example.com/2021/12/09/KMP/index.html">
 <meta property="og:site_name" content="荧惑の杂货铺子v3.6">
-<meta property="og:description" content="构造一个字符串，给定n, k。n代表字符串长度，k代表字符串可以使用的符号范围（自a起），对于同时 这样的片段会使得字符串的消耗加一，求最小消耗.">
+<meta property="og:description" content="解决问题KMP算法解决了模式串O（n + m）匹配问题，其中next数组解决了字符串最长相同前后缀问题 解决方法首先朴素的考虑暴力匹配 AAAAAF AF     复杂度为O(n * m)，显然没法实现日用 因此需要一个高效匹配方案 考虑一下我们的过程 定义文本串为第i位，模式串为第j位 当 j 与 i 失配时，在 i+1 位上需要把 j 回归到第一位 很显然在遍历过程不可少的情况下，可以优化的">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2021/11/17/D.%20Min-Cost-String/miku04.jpg">
-<meta property="article:published_time" content="2021-11-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-06T12:26:11.474Z">
+<meta property="og:image" content="http://example.com/null">
+<meta property="article:published_time" content="2021-12-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-15T13:20:35.917Z">
 <meta property="article:author" content="荧惑">
-<meta property="article:tag" content="字符串">
-<meta property="article:tag" content="哈希">
-<meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/11/17/D.%20Min-Cost-String/miku04.jpg">
+<meta name="twitter:image" content="http://example.com/null">
 <meta name="twitter:site" content="@null">
   
   <!-- 站点验证相关 -->
@@ -275,17 +272,17 @@ mjx-container[display="true"] + br {
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">D. Min-Cost-String</h1>
+                <h1 class="kratos-entry-title text-center">KMP</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2021-11-17</li>
+                <li><i class="fa fa-calendar"></i> 2021-12-09</li>
                 <li><i class="fa fa-user"></i> 作者 荧惑</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        893
+                        1108
                     
                     字
                 </li>
@@ -294,18 +291,33 @@ mjx-container[display="true"] + br {
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1638793571474"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1639574435917"></time> 前，其中的内容可能需要更新。
             </div>
             
+                <div class="kratos-post-inner-toc">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">解决问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%80%E4%BB%A5%E5%BC%80%E5%A7%8B%E6%AD%A3%E7%BB%8F%E6%8E%A8%E7%90%86%E5%9B%9E%E5%BD%92%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">所以开始正经推理回归过程：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">程序实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-number">4.</span> <span class="toc-text">性质</span></a></li></ol>
+                </div>
+            
             <hr />
-            <p>构造一个字符串，给定n, k。n代表字符串长度，k代表字符串可以使用的符号范围（自a起），对于<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.666ex" xmlns="http://www.w3.org/2000/svg" width="25.134ex" height="2.363ex" role="img" focusable="false" viewBox="0 -750 11109 1044.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mi" transform="translate(502,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mo" transform="translate(1073.7,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z" transform="translate(778,0)"></path></g><g data-mml-node="msub" transform="translate(2907.5,0)"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mi" transform="translate(502,-150) scale(0.707)"><path data-c="1D457" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"></path></g></g><g data-mml-node="mi" transform="translate(3750.8,0)"><text data-variant="italic" transform="scale(1,-1)" font-size="884px" font-family="serif" font-style="italic">同</text></g><g data-mml-node="mi" transform="translate(4650.8,0)"><text data-variant="italic" transform="scale(1,-1)" font-size="884px" font-family="serif" font-style="italic">时</text></g><g data-mml-node="msub" transform="translate(5550.8,0)"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="TeXAtom" transform="translate(502,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(345,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(1123,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="mo" transform="translate(7528.2,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z" transform="translate(778,0)"></path></g><g data-mml-node="msub" transform="translate(9362,0)"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="TeXAtom" transform="translate(502,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D457" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"></path></g><g data-mml-node="mo" transform="translate(412,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(1190,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></g></g></svg></mjx-container> 这样的片段会使得字符串的消耗加一，求最小消耗.</p>
-<span id="more"></span>
-<p>对于字符串的处理优先考虑<strong><em>哈希</em></strong>​(本人就憨憨的直接开写),把这道题将进一步考虑，对于组合ab，当它被用过后，它的选择优先度会降低，因为此前与他匹配过的每一对都可以继续匹配，因此，贪心的方向是尽可能的<strong><em>平均使用</em></strong>各组合，于是我们可以记录一下已经使用过的组合</p>
-<p>对于使用次数不相同的组合，应使用使用次数少的</p>
-<p>对于使用次数相同的组合，应使用字典序靠后的（这里，因为我们的遍历是从a-&gt;z,那么我们如果不以这个为判断，会浪费掉本可以使用的部分）</p>
-<p>于是代码如下</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">5e5</span> + <span class="number">5</span>;</span><br><span class="line">map&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;mp;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hs</span><span class="params">(<span class="keyword">char</span> a, <span class="keyword">char</span> b)</span></span>{</span><br><span class="line">	<span class="keyword">return</span> a * <span class="number">100</span> + b;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	<span class="keyword">int</span> n, m; cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">char</span> l = <span class="string">'a'</span>, r = <span class="string">'a'</span> + m - <span class="number">1</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">'a'</span>;</span><br><span class="line">	<span class="keyword">char</span> pre = <span class="string">'a'</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i){</span><br><span class="line">		<span class="keyword">int</span> sign = maxn;</span><br><span class="line">		<span class="keyword">char</span> ans;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">char</span> j = l; j &lt;= r; ++j){</span><br><span class="line">			<span class="keyword">int</span> e = <span class="built_in">hs</span>(pre,j);</span><br><span class="line">			<span class="keyword">if</span>(sign &gt;= mp[e]){</span><br><span class="line">				sign = mp[e];</span><br><span class="line">				ans = j;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		mp[<span class="built_in">hs</span>(pre,ans)]++;</span><br><span class="line">		cout &lt;&lt; ans;</span><br><span class="line">		pre = ans;</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
+            <span id="more"></span>
+<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>KMP算法解决了模式串O（n + m）匹配问题，其中next数组解决了字符串最长相同前后缀问题</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>首先朴素的考虑暴力匹配</p>
+<p>AAAAAF</p>
+<p>AF</p>
+<p><img src="C:\Users\86186\AppData\Roaming\Typora\typora-user-images\image-20211209160702194.png" alt="image-20211209160702194">   </p>
+<p>复杂度为O(n * m)，显然没法实现日用</p>
+<p>因此需要一个高效匹配方案</p>
+<p>考虑一下我们的过程</p>
+<p>定义文本串为第i位，模式串为第j位</p>
+<p>当 j 与 i 失配时，在 i+1 位上需要把 j 回归到第一位 很显然<strong>在遍历过程不可少的情况下，可以优化的部分在于回归这个过程上</strong></p>
+<h3 id="所以开始正经推理回归过程："><a href="#所以开始正经推理回归过程：" class="headerlink" title="所以开始正经推理回归过程："></a>所以开始正经推理回归过程：</h3><p>若模式串能匹配到第 j 位，说明前 j - 1位完全匹配， 那么若第 j 位失配， 能利用的就是完全匹配这一条件</p>
+<p>换而言之，如果不想要直接回归到1， 应当确保，回归后，前k位可以直接在文本串上<strong>直接匹配</strong></p>
+<p>换而言之， 前k位和后k位完全相同</p>
+<p><img src="C:\Users\86186\AppData\Roaming\Typora\typora-user-images\image-20211209162012276.png" alt="image-20211209162012276"></p>
+<p>实在是非常高妙</p>
+<p>换而言之，我们只需要得到模式串的next， 每次失配就回到它对应的K，如果到头了就说明没救了，下一位继续吧</p>
+<h2 id="程序实现"><a href="#程序实现" class="headerlink" title="程序实现"></a>程序实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">5e5</span> + <span class="number">6</span>;</span><br><span class="line"><span class="keyword">int</span> nex[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(string e)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> k = <span class="number">-1</span>;</span><br><span class="line">	nex[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; e.<span class="built_in">size</span>(); ++i){</span><br><span class="line">		<span class="keyword">while</span>(k != <span class="number">-1</span> &amp;&amp; e[i] != e[k]) k = nex[k]; <span class="comment">//如果适配，一直找下去 </span></span><br><span class="line">		k++;<span class="comment">//匹配成功 </span></span><br><span class="line">		nex[i + <span class="number">1</span>] = k;</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kmp</span><span class="params">(string a, string b)</span></span>{</span><br><span class="line">	<span class="built_in">init</span>(b);</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.<span class="built_in">size</span>(); ++i){</span><br><span class="line">		<span class="keyword">while</span>(j != <span class="number">-1</span> &amp;&amp; a[i] != b[j]) j = nex[j];</span><br><span class="line">		j++;</span><br><span class="line">		<span class="keyword">if</span>(j == b.<span class="built_in">size</span>()){</span><br><span class="line">			cout &lt;&lt; i - j + <span class="number">1</span> &lt;&lt; endl;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">			<span class="comment">//j = nex[j]; 如果需要多次匹配换这个 </span></span><br><span class="line">		} </span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	string a, b; cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">	<span class="built_in">kmp</span>(a, b);</span><br><span class="line">} </span><br></pre></td></tr></table></figure>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2>
         </div>
         
             <div class="kratos-copyright text-center clearfix">
@@ -358,7 +370,7 @@ mjx-container[display="true"] + br {
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://example.com/2021/11/17/D.%20Min-Cost-String/",
+                text: "http://example.com/2021/12/09/KMP/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -370,9 +382,16 @@ mjx-container[display="true"] + br {
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://example.com/2021/11/17/D.%20Min-Cost-String/";
-            const title         = "「D. Min-Cost-String」";
-            const excerpt       = `构造一个字符串，给定n, k。n代表字符串长度，k代表字符串可以使用的符号范围（自a起），对于同时 这样的片段会使得字符串的消耗加一，求最小消耗.`;
+            const hostUrl       = "http://example.com/2021/12/09/KMP/";
+            const title         = "「KMP」";
+            const excerpt       = `
+解决问题KMP算法解决了模式串O（n + m）匹配问题，其中next数组解决了字符串最长相同前后缀问题
+解决方法首先朴素的考虑暴力匹配
+AAAAAF
+AF
+   
+复杂度为O(n * m)，显然没法实现日用
+因此需要一个高效匹配方案...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -391,10 +410,10 @@ mjx-container[display="true"] + br {
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a>, <a class="tag-none-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a>, <a class="tag-none-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a>
+                    
                 </div>
                 <div class="pull-date">
-                <span>最后编辑：2021-12-06</span>
+                <span>最后编辑：2021-12-15</span>
                 </div>
             </div>
         </footer>
@@ -403,13 +422,9 @@ mjx-container[display="true"] + br {
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 任务清单" href="/2021/11/17/任务清单/">&lt; 上一篇</a>
+                <a title=" 哈夫曼树" href="/2021/12/09/哈夫曼树/">&lt; 上一篇</a>
             </div>
             
-            
-            <div class="nav-next clearfix">
-                <a title=" math" href="/2021/11/29/math/">下一篇 &gt;</a>
-            </div>
             
         </nav>
     
@@ -442,6 +457,18 @@ mjx-container[display="true"] + br {
 </aside>
             
                     <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix">
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar"></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98"><span class="toc-text">解决问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%80%E4%BB%A5%E5%BC%80%E5%A7%8B%E6%AD%A3%E7%BB%8F%E6%8E%A8%E7%90%86%E5%9B%9E%E5%BD%92%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-text">所以开始正经推理回归过程：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="toc-text">程序实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-text">性质</span></a></li></ol>
+    </div>
+</aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
