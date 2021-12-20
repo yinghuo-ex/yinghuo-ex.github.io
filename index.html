@@ -384,7 +384,6 @@ mjx-container[display="true"] + br {
     
     
     
-    
         <article class="kratos-hentry clearfix">
             <div class="kratos-entry-border-new clearfix">
                 
@@ -536,7 +535,7 @@ hexo内置的MARKDOWN只支持简单操作，对于注入这样的复杂语句�
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">学习资料</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">学习资料</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a><span class="category-list-count">3</span></li></ul>
   </aside>
 
 
@@ -556,12 +555,6 @@ hexo内置的MARKDOWN只支持简单操作，对于注入这样的复杂语句�
   <div class="tab-content">
       <ul class="list-group">
         
-        
-          
-          
-            <a class="list-group-item" href="/2021/12/09/KMP/"><i class="fa  fa-book"></i> KMP</a>
-            
-          
         
           
           
@@ -588,7 +581,11 @@ hexo内置的MARKDOWN只支持简单操作，对于注入这样的复杂语句�
           
         
           
+          
+            <a class="list-group-item" href="/2021/11/17/D.%20Min-Cost-String/"><i class="fa  fa-book"></i> D. Min-Cost-String</a>
             
+          
+        
           
             
           
@@ -708,5 +705,20 @@ hexo内置的MARKDOWN只支持简单操作，对于注入这样的复杂语句�
 <!-- Extra support for third-party plguins  -->
 
 
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>
